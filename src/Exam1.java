@@ -5,73 +5,114 @@ public class Exam1 {
 
 	public static void main(String[] args) {
 		Scanner sc = new Scanner(System.in);
-		ArrayList<String> titles = new ArrayList<>();
-		ArrayList<String> bodies = new ArrayList<>();
-		ArrayList<Integer> num = new ArrayList<>();
 		ArrayList<Article> articles = new ArrayList<>();
+		Article a1 = new Article(1, "ì œëª©1", "ë‚´ìš©1");
+		Article a2 = new Article(1, "ì œëª©1", "ë‚´ìš©1");
+		Article a3 = new Article(1, "ì œëª©1", "ë‚´ìš©1");
+		
+		articles.add(a1);
+		articles.add(a2);
+		articles.add(a3);
+		
+		
 		int no = 1;
 
 		while (true) {
-			System.out.print("¸í·É¾î¸¦ ÀÔ·ÂÇØÁÖ¼¼¿ä : ");
+			System.out.print("ëª…ë ¹ì–´ë¥¼ ì…ë ¥í•´ì£¼ì„¸ìš” : ");
 			String srt = sc.next();
 			if (srt.equals("exit")) {
-				System.out.println("Á¾·á");
+				System.out.println("ì¢…ë£Œ");
 				break;
 			}
 			if (srt.equals("add")) {
 				Article a = new Article();
-				num.add(no);
+
+				a.setNum(no);
 				no++;
-				System.out.println("°Ô½Ã¹° Á¦¸ñÀ» µî·ÏÇØÁÖ¼¼¿ä : ");
+				System.out.println("ê²Œì‹œë¬¼ ì œëª©ì„ ë“±ë¡í•´ì£¼ì„¸ìš” : ");
 				String title = sc.next();
-				a.title = title;
-				titles.add(title);
-				System.out.println("°Ô½Ã¹° Á¦¸ñÀ» µî·ÏÇØÁÖ¼¼¿ä : ");
+				a.setTitle(title);
+				System.out.println("ê²Œì‹œë¬¼ ë‚´ìš©ì„ ë“±ë¡í•´ì£¼ì„¸ìš” : ");
 				String body = sc.next();
-				a.body = body;
-				bodies.add(body);
-				System.out.println("°Ô½Ã¹° µî·ÏÀÌ ¿Ï·á µÇ¾ú½À´Ï´Ù.");
+				a.setBody(body);
+				System.out.println("ê²Œì‹œë¬¼ ë“±ë¡ì´ ì™„ë£Œ ë˜ì—ˆìŠµë‹ˆë‹¤");
+
+				articles.add(a);
 			}
 			if (srt.equals("list")) {
-				for (int i = 0; i < titles.size(); i++) {
-					System.out.println("¹øÈ£ : " + num.get(i));
-					System.out.println("Á¦¸ñ : " + titles.get(i));
-					System.out.println("³»¿ë : " + bodies.get(i));
+
+				for (int i = 0; i < articles.size(); i++) {
+					Article article = articles.get(i);
+					System.out.println("ë²ˆí˜¸ : " + article.getNum());
+					System.out.println("ì œëª© : " + article.getTitle());
 					System.out.println("==========================");
 				}
 			}
 			if (srt.equals("update")) {
-				System.out.println("¾î¶² °Ô½Ã¹°À» ¼öÁ¤ÇÏ½Ã°Ú½À´Ï±î?");
+				System.out.println("ìˆ˜ì •í•  ê²Œì‹œë¬¼ì„ ì„ íƒí•´ì£¼ì„¸ìš”");
 				int targetId = sc.nextInt();
-				 for(int i = 0; i < num.size(); i++) {
-					 int id = num.get(i);
-					 if(id == targetId) {
-						 System.out.println("Á¦¸ñÀ» ¼öÁ¤ÇØ ÁÖ¼¼¿ä");
-						 String newTitle = sc.next();
-						 System.out.println("³»¿ëÀ» ¼öÁ¤ÇØ ÁÖ¼¼¿ä");
-						 String newBody = sc.next();
-						 
-						 titles.set(i, newTitle);
-						 bodies.set(i, newBody);
-						 break;
-					 }
-				 }
-			}
-			if(srt.equals("delete")) {
-				System.out.println("¾î¶²°Ô½Ã¹°À» »èÁ¦ÇÒ±î¿ä?");
-				int targetNum = sc.nextInt();
-				for(int i = 0; i < num.size(); i++) {
-					int nom = num.get(i);
-					if(nom == targetNum) {
-						titles.remove(i);
-						bodies.remove(i);
-						num.remove(i);
-						System.out.println("»èÁ¦ ¿Ï·áÇß½À´Ï´Ù");
+				for (int i = 0; i < articles.size(); i++) {
+					Article article = articles.get(i);
+					int id = article.getNum();
+					if (id == targetId) {
+						System.out.println("ì œëª©ì„ ìˆ˜ì •í•´ ì£¼ì„¸ìš”");
+						String newTitle = sc.next();
+						System.out.println("ë‚´ìš©ì„ ìˆ˜ì •í•´ ì£¼ì„¸ìš”");
+						String newBody = sc.next();
+
+						Article newArticle = new Article();
+						newArticle.setNum(id);
+						newArticle.setTitle(newTitle);
+						newArticle.setBody(newBody);
+
+						articles.set(i, newArticle);
+						System.out.println("ìˆ˜ì •í•˜ì˜€ìŠµë‹ˆë‹¤");
 						break;
 					}
 				}
 			}
+			if (srt.equals("delete")) {
+				System.out.println("ì‚­ì œí•  ê²Œì‹œë¬¼ì„ ì„ íƒí•´ì£¼ì„¸ìš”");
+				int targetNum = sc.nextInt();
+				int fleg = 2; // 1.ìˆìŒ 2.ì—†ìŒ
+				for (int i = 0; i < articles.size(); i++) {
+					int nom = articles.get(i).getNum();
+					if (nom == targetNum) {
+						fleg = 1;
+						articles.remove(i);
+
+						break;
+					}
+				}
+				if (fleg == 2) {
+					System.out.println("í•´ë‹¹ê²Œì‹œë¬¼ì€ ì—†ìŠµë‹ˆë‹¤");
+				} else {
+					System.out.println("ì‚­ì œ ì™„ë£Œí–ˆìŠµë‹ˆë‹¤");
+				}
+			}
+			if (srt.equals("read")) {
+				System.out.println("ë³´ì‹¤ ê²Œì‹œë¬¼ì„ ì„ íƒí•´ì£¼ì„¸ìš”");
+				int targetNum = sc.nextInt();
+				int fleg = 2;
+				for (int i = 0; i < articles.size(); i++) {
+					int num = articles.get(i).getNum();
+					if (num == targetNum) {
+						fleg = 1;
+						System.out.println(targetNum + "ë²ˆ ìƒì„¸ë‚´ìš©");
+						System.out.println("ë²ˆí˜¸ : " + articles.get(i).getNum());
+						System.out.println("ì œëª© : " + articles.get(i).getTitle());
+						System.out.println("ë‚´ìš© : " + articles.get(i).getBody());
+						break;
+					}
+				}
+				if (fleg == 2) {
+					System.out.println("í•´ë‹¹ê²Œì‹œë¬¼ì€ ì—†ìŠµë‹ˆë‹¤");
+				}
+			}
 
 		}
+	}
+	public static void getArticleIndexById(int num) {
+		
 	}
 }
